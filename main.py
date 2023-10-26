@@ -15,7 +15,7 @@ class Route:
 
 routes: list[Route] = [
     Route(Point(2559, None), Point(-1920, None)),
-    Route(Point(-1920, None), Point(2559, None)),
+    Route(Point(-1920, None), Point(800, 0)),
     
 ]
 
@@ -24,8 +24,8 @@ def is_pos_in_route(route: Route, pos: Point) -> bool:
     (route.src.y == pos.y or not route.src.y)
 
 def move_to_route(route: Route, pos: Point) -> None:
-    dest_x = route.dest.x if route.dest.x else pos.x
-    dest_y = route.dest.y if route.dest.y else pos.y
+    dest_x = route.dest.x if route.dest.x != None else pos.x
+    dest_y = route.dest.y if route.dest.y != None else pos.y
     pyautogui.moveTo((dest_x, dest_y))
 
 
