@@ -22,9 +22,13 @@ fn display_monitors() -> Vec<Monitor> {
             right: monitor.rcWork.right,
             bottom: monitor.rcWork.bottom,
         };
+        let width = i32::abs(curr_border.left - curr_border.right);
+        let height = i32::abs(curr_border.top - curr_border.bottom);
         monitors.push(Monitor {
             name: name.clone().into_string().unwrap(),
             borders: curr_border,
+            width,
+            height
         });
     }
     monitors

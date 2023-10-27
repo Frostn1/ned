@@ -3,4 +3,18 @@
     background: #2f2f2f;
     height: 100vh;
     color: white;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        height: 50px;
+        width: 100%;
+        background-color: aqua;
+    }
+
+    .body {
+        height: 100%;
+        
+        padding: 10px;
+    }
 }
