@@ -7,18 +7,12 @@ const ratio = .1;
 const Display = ({ data, position, index, onMouseDown }) => {
     const height = data.height * ratio;
     const width = data.width * ratio;
-    const style = { width: `${width}px`, height: `${height}px`, top: `${position && position.y}px`, left: `${position && position.x || 0}px`}
-    console.log('position', position)
-    function onDragStart (e) {
-        console.log('drag start');
+    const style = { width: `${width}px`, height: `${height}px`, top: `${position && position.y}px`, left: `${position && position.x || 0}px` }
+    function onDragStart(e) {
         onMouseDown(true, index)
     }
-    function onDragStop (e) {
-        console.log('drag stop');
-        onMouseDown(false, index)
-    }
     return (
-        <div id={'display-'+index} key={Math.random()} style={style} onMouseDownCapture={onDragStart}>
+        <div id={'adisplay-' + index} key={Math.random()} style={style} onMouseDownCapture={onDragStart}>
             <div className={'resolution'}>
                 {data.width} X {data.height}
             </div>
