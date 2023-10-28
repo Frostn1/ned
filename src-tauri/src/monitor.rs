@@ -1,6 +1,7 @@
 use crate::border::Border;
 use serde::ser::{Serialize, SerializeStruct, Serializer};
 
+#[derive(Debug)]
 pub(crate) struct Monitor {
     pub name: String,
     pub borders: Border,

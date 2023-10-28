@@ -1,6 +1,7 @@
-use serde::ser::{Serialize, SerializeStruct, Serializer};
+use serde::ser::{SerializeStruct, Serializer};
 
 
+#[derive(Debug)]
 pub(crate) struct Border {
     pub left: i32,
     pub top: i32,
