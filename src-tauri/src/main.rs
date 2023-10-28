@@ -1,14 +1,15 @@
-mod monitor;
 mod border;
-mod enum_monitors;
 mod db;
+mod enum_monitors;
+mod monitor;
 
 use std::{ffi::OsString, os::windows::prelude::OsStringExt};
 
-use db::write_new_monitors;
+use db::{read_from_db, write_new_monitors};
+use serde_json::Value;
 
 use crate::border::Border;
-use crate::{monitor::Monitor, enum_monitors::enumerate_monitors};
+use crate::{enum_monitors::enumerate_monitors, monitor::Monitor};
 
 #[tauri::command]
 fn find_monitors() {
@@ -31,16 +32,22 @@ fn find_monitors() {
             name: name.clone().into_string().unwrap(),
             borders: curr_border,
             width,
-            height
+            height,
         });
     }
     write_new_monitors(monitors);
 }
 
+#[tauri::command]
+fn restore_monitors() -> Value {
+    let db = read_from_db();
+    db["displays"].to_owned()
+}
+
 fn main() {
     db::read_from_db();
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![find_monitors])
+        .invoke_handler(tauri::generate_handler![find_monitors, restore_monitors])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

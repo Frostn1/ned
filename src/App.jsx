@@ -31,7 +31,7 @@ function App() {
     <div id={'app'}>
       <Header />
       <div className={'body'}>
-        <CommandHeader/>
+        {/* <CommandHeader/> */}
         <DisplayContainer monitors={monitors}/>
         
       </div>
