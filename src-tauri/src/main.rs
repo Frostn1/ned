@@ -39,7 +39,7 @@ fn find_monitors() {
 }
 
 #[tauri::command]
-fn restore_monitors() -> Value {
+fn fetch_monitors() -> Value {
     let db = read_from_db();
     db["displays"].to_owned()
 }
@@ -47,7 +47,7 @@ fn restore_monitors() -> Value {
 fn main() {
     db::read_from_db();
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![find_monitors, restore_monitors])
+        .invoke_handler(tauri::generate_handler![find_monitors, fetch_monitors])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

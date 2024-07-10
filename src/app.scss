@@ -1,24 +1,8 @@
 #app {
-    // background: red;
-    background: #2f2f2f;
     height: 100vh;
-    color: white;
-    display: flex;
-    flex-direction: column;
+    width: 100vw;
+}
 
-    .header {
-        height: 50px;
-        width: 100%;
-        background-color: aqua;
-    }
-
-    .body {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        background: #3f3f3f;
-        // background: rgb(149, 144, 144);
-        // background: red;
-    }
+body {
+    margin: 0;
 }

@@ -17,4 +17,26 @@ export default defineConfig(async () => ({
   // 3. to make use of `TAURI_DEBUG` and other env variables
   // https://tauri.app/v1/api/config#buildconfig.beforedevcommand
   envPrefix: ["VITE_", "TAURI_"],
+  esbuild: {
+    loader: "jsx",
+    include: /src\/.*\.jsx?$/,
+    // loader: "tsx",
+    // include: /src\/.*\.[tj]sx?$/,
+    exclude: [],
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      plugins: [
+        {
+          name: "load-js-files-as-jsx",
+          setup(build) {
+            build.onLoad({ filter: /src\/.*\.js$/ }, async (args) => ({
+              loader: "jsx",
+              contents: await fs.readFile(args.path, "utf8"),
+            }));
+          },
+        },
+      ],
+    },
+  },
 }));
