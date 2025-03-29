@@ -1,1 +1,1 @@
-{"monitors":[{"borders":{"bottom":1219,"left":-1920,"right":0,"top":139},"height":1080,"name":"\\\\.\\DISPLAY2","width":1920},{"borders":{"bottom":1440,"left":0,"right":2560,"top":0},"height":1440,"name":"\\\\.\\DISPLAY1","width":2560}]}
+{"monitors":[{"border":{"bottom":1440,"left":0,"right":2560,"top":0},"height":1440,"name":"\\\\.\\DISPLAY1","width":2560},{"border":{"bottom":1219,"left":-1920,"right":0,"top":139},"height":1080,"name":"\\\\.\\DISPLAY2","width":1920}]}

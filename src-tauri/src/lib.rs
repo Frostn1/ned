@@ -1,10 +1,13 @@
 mod border;
+mod cursor;
 mod db;
 mod enum_monitors;
 mod monitor;
 
+use std::time::Duration;
 use std::{ffi::OsString, os::windows::prelude::OsStringExt};
 
+use cursor::check_cursor;
 use db::{read_from_db, write_new_monitors};
 use serde_json::Value;
 
@@ -29,7 +32,7 @@ fn search_monitors() {
         let height = i32::abs(curr_border.top - curr_border.bottom);
         monitors.push(Monitor {
             name: name.clone().into_string().unwrap(),
-            borders: curr_border,
+            border: curr_border,
             width,
             height,
         });
@@ -50,6 +53,17 @@ pub fn run() {
     db::read_from_db();
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![search_monitors, fetch_monitors])
+        .setup(|_| {
+            // Spawn an async task instead of a blocking thread
+            tauri::async_runtime::spawn(async move {
+                loop {
+                    check_cursor();
+                    tokio::time::sleep(Duration::from_secs(5)).await;
+                }
+            });
+
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
