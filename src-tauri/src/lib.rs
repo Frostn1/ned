@@ -49,7 +49,7 @@ fn fetch_monitors() -> Value {
 pub fn run() {
     db::read_from_db();
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![fetch_monitors, search_monitors])
+        .invoke_handler(tauri::generate_handler![search_monitors, fetch_monitors])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

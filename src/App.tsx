@@ -1,13 +1,15 @@
 import { invoke } from "@tauri-apps/api/core";
 import { useState, useEffect } from "react";
 import "./index.css";
+import { Monitor } from "./types/monitor";
 
 function App() {
-  const [monitors, setMonitors] = useState([]);
+  const [monitors, setMonitors] = useState<Monitor[]>([]);
 
   async function fetchMonitors() {
-    const monitors = await invoke("fetch_monitors");
-    setMonitors(monitors);
+    const monitors = await invoke<Monitor[]>("fetch_monitors");
+    console.log('sean .. monitors', monitors)
+    setMonitors(monitors)
   }
 
   useEffect(() => {
